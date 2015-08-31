@@ -29,5 +29,23 @@ namespace ProcessDemo.Controllers
         {
             return View("Index", dataRepo.NewJob());
         }
+
+        [HttpGet]
+        public ActionResult Progress()
+        {
+            return View("Index", dataRepo.SimulateProgression());
+        }
+
+        [HttpGet]
+        public ActionResult Restart(int id)
+        {
+            return View("Index", dataRepo.StartJob(id));
+        }
+
+        [HttpGet]
+        public ActionResult Pause(int id)
+        {
+            return View("Index", dataRepo.PauseJob(id));
+        }
     }
 }

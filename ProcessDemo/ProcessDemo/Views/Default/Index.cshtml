@@ -25,11 +25,24 @@
             <td>@processData.Name</td>
             <td>@processData.Status</td>
             <td>@processData.DataItems.Count</td>
-            <td>@processData.DataItems.Count(di => di.Status != "Completed")</td>
-            <td>@processData.DataItems.Count(di => di.Status == "Completed")</td>
+            <td>@processData.DataItems.Count(di => di.Status != "completed")</td>
+            <td>@processData.DataItems.Count(di => di.Status == "completed")</td>
+            <td>
+                @if (processData.Status == "paused")
+                {
+                    @Ajax.ActionLink("Restart", "Restart", new { id = processData.Id },  new AjaxOptions { HttpMethod = "Get" })
+                }
+                else if (processData.Status == "inprocess")
+                {
+                    @Ajax.ActionLink("Pause", "Pause", new { id = processData.Id }, new AjaxOptions { HttpMethod = "Get" })
+                }
+            </td>
         </tr>
     }
 </table>
 
 
 @Ajax.ActionLink("Add new job", "AddJob", new AjaxOptions { HttpMethod = "Get" })
+
+
+@Ajax.ActionLink("Progress", "Progress", new AjaxOptions { HttpMethod = "Get" })

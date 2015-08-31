@@ -11,6 +11,7 @@ namespace ProcessDemo.MockRepo.BLL
         private static List<ProcessDataViewModel> processes;
 
         private const string queued = "queued";
+        private const string inprocess = "inprocess";
         private const string paused = "paused";
         private const string completed = "completed";
 
@@ -25,7 +26,7 @@ namespace ProcessDemo.MockRepo.BLL
         {
             Initialize();
 
-            var nextProcess = processes.Where(p => p.Status == queued).FirstOrDefault();
+            var nextProcess = processes.Where(p => p.Status == queued || p.Status == inprocess ).FirstOrDefault();
 
             if(nextProcess != null)
             {
@@ -33,8 +34,16 @@ namespace ProcessDemo.MockRepo.BLL
 
                 if(nextDataItem != null)
                 {
-                    System.Threading.Thread.Sleep(1000); //pretend we're working...
                     nextDataItem.Status = completed;
+
+                    if(!nextProcess.DataItems.Any(i => i.Status == queued || i.Status == inprocess ))
+                    {
+                        nextProcess.Status = completed;
+                    }
+                    else
+                    {
+                        nextProcess.Status = inprocess;
+                    }
                 }
             }
 
