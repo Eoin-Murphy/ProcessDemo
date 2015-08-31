@@ -9,11 +9,11 @@ using ProcessDemo.MockRepo.BLL;
 
 namespace ProcessDemo.Controllers
 {
-    public class DefaultController : Controller
+    public class HomeController : Controller
     {
         private IDataRepo dataRepo;
 
-        public DefaultController()
+        public HomeController()
         {
             dataRepo = new MockRepo.BLL.MockRepo();
         }
