@@ -12,7 +12,7 @@ namespace ProcessDemo.Models
             DataItems = new List<ProcessDataItemViewModel>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
