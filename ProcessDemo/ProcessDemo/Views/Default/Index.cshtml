@@ -1,7 +1,32 @@
-﻿
+﻿@using ProcessDemo.Models
+@model List<ProcessDataViewModel>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-<div>Test</div>
+
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Total Work Items</td>
+            <td>Pending</td>
+            <td>Completed</td>
+        </tr>
+    </thead>
+    @foreach (var processData in Model)
+    {
+        <tr>
+            <td>@processData.Id</td>
+            <td>@processData.Name</td>
+            <td>@processData.Status</td>
+            <td>@processData.DataItems.Count</td>
+            <td>@processData.DataItems.Count(di => di.Status != "Completed")</td>
+            <td>@processData.DataItems.Count(di => di.Status == "Completed")</td>
+        </tr>
+    }
+</table>
